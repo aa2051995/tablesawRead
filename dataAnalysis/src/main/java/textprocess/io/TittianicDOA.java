@@ -6,9 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
-import java.util.Vector;
 import java.util.stream.Collectors;
-
 import org.knowm.xchart.CategoryChart;
 import org.knowm.xchart.CategoryChartBuilder;
 import org.knowm.xchart.PieChart;
@@ -19,12 +17,14 @@ import org.knowm.xchart.style.Styler;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sun.imageio.spi.InputStreamImageInputStreamSpi;
 
+import joinery.DataFrame;
 import tech.tablesaw.api.Table;
 import tech.tablesaw.io.csv.CsvReadOptions;
 
 public class TittianicDOA {
-public  static void readcsv(String filename) {
+public  static void readcsvuTableSaw(String filename) {
 // read csv file using tablesaw  to test dependdencies 
 	
 	CsvReadOptions.Builder builder = 
@@ -45,6 +45,29 @@ public  static void readcsv(String filename) {
 
 	System.out.println(t1.columns());
 	System.out.println(t1.summary());
+}
+public  static void readcsvujoinery(String filename) {
+	
+
+	try {
+		DataFrame<Object> titanicpassengers = DataFrame.readCsv(filename,";");
+		//DataFrame<Object> t1 =  titanicpassengers.groupBy(m->m.stream().filter(t->t.toString() =="Sex").).mean();
+		//System.out.println(t1);
+		titanicpassengers.columns().stream().filter(m-> titanicpassengers.get(0, m) instanceof Number).collect(Collectors.toList()).forEach(t->System.out.println(t.toString()));
+		//System.out.println(titanicpassengers.retain("Sex", "SibSp", "Parch", "Fare").groupBy(m->m.get(0)).mean());
+		DataFrame<Object> passengers_stat = titanicpassengers.retain("Sex","SibSp", "Parch", "Fare");
+		System.out.println("mean  "+passengers_stat.groupBy(c->c.get(0)).mean());
+		System.out.println("min :"+passengers_stat.groupBy(c->c.get(0)).min());
+		System.out.println("max :"+passengers_stat.groupBy(c->c.get(0)).max());
+		System.out.println("std dev :"+passengers_stat.groupBy(c->c.get(0)).stddev());
+		System.out.println("var :"+passengers_stat.groupBy(c->c.get(0)).var());
+		System.out.println(passengers_stat.groupBy(c->c.get(0)).sum());
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	//titanicpassengers.su
+
 }
 public  List<TitanicPassenger> getPassengersFromJsonFile() {
 	List<TitanicPassenger> allPassengers = new Vector<TitanicPassenger>();
