@@ -14,7 +14,15 @@ public class Main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		String filename = "G:\\exported data\\iti\\Java & UML Programming\\titanic-passengers.csv";
-        TittianicDOA.readcsv(filename);
+        //TittianicDOA.readcsv(filename);
+		TittianicDOA tittianicDOA = new TittianicDOA();
+        List<TitanicPassenger> passengers =tittianicDOA.getPassengersFromJsonFile();
+        tittianicDOA.graphPassengerAgesDraw(passengers);
+        tittianicDOA.graphPassengerClass(passengers);
+        tittianicDOA.graphPassengerSurvived(passengers);
+        tittianicDOA.graphPassengerSurvivedGender(passengers);
+        
+        //System.out.println("test"+passengers.get(0).getName());
 		
 	}
 
