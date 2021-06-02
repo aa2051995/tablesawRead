@@ -61,7 +61,7 @@ public  static void readcsvujoinery(String filename) {
 		System.out.println("max :"+passengers_stat.groupBy(c->c.get(0)).max());
 		System.out.println("std dev :"+passengers_stat.groupBy(c->c.get(0)).stddev());
 		System.out.println("var :"+passengers_stat.groupBy(c->c.get(0)).var());
-		System.out.println(passengers_stat.groupBy(c->c.get(0)).sum());
+		System.out.println("sum :"+passengers_stat.groupBy(c->c.get(0)).sum());
 	} catch (IOException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
