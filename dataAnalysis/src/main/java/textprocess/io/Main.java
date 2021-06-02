@@ -13,9 +13,11 @@ public class Main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String filename = "G:\\exported data\\iti\\Java & UML Programming\\titanic-passengers.csv";
-        //TittianicDOA.readcsv(filename);
+		String filename = "src/main/resources/titanic-passengers.csv";
+        TittianicDOA.readcsv(filename);
 		TittianicDOA tittianicDOA = new TittianicDOA();
+		
+		// testing reading json file using jackson and ploting using xchart 
         List<TitanicPassenger> passengers =tittianicDOA.getPassengersFromJsonFile();
         tittianicDOA.graphPassengerAgesDraw(passengers);
         tittianicDOA.graphPassengerClass(passengers);
