@@ -24,14 +24,8 @@ import tech.tablesaw.api.Table;
 import tech.tablesaw.io.csv.CsvReadOptions;
 
 public class TittianicDOA {
-public  void readcsv(String filename) {
-//	DataFrame<Object> titaincs_row = null;
-//	try {
-//		titaincs_row = DataFrame.readCsv("G:\\exported data\\iti\\Java & UML Programming\\titanic-passengers.csv");
-//	} catch (IOException e) {
-//		// TODO Auto-generated catch block
-//		e.printStackTrace();
-//	}
+public  static void readcsv(String filename) {
+// read csv file using tablesaw  to test dependdencies 
 	
 	CsvReadOptions.Builder builder = 
 			CsvReadOptions.builder(filename)
